@@ -1,0 +1,23 @@
+print "Starting maya loading and fbx conversion \n";
+	
+if (`file -q -exists "/Users/tiffanylee/Desktop/School/TNS_2013-2017/2016f-2017s/Unity17/labor/New Unity Project/Assets/headMove3.mb"`)
+{		
+	file -o "/Users/tiffanylee/Desktop/School/TNS_2013-2017/2016f-2017s/Unity17/labor/New Unity Project/Assets/headMove3.mb";
+	FBXExportEmbeddedTextures -v false;
+	// FBXExportHardEdges -v true;
+	FBXExportApplyConstantKeyReducer -v false;
+	FBXExportShowUI -v false;
+
+	print "Before fbx export\n";
+	FBXExport -f "/Users/tiffanylee/Desktop/School/TNS_2013-2017/2016f-2017s/Unity17/labor/New Unity Project/Temp/ExportedFBXFile.fbx";
+	print "after fbx export\n";
+}
+else
+	print "Could not open Maya file.";
+
+
+system ("rm \"/Users/tiffanylee/Desktop/School/TNS_2013-2017/2016f-2017s/Unity17/labor/New Unity Project/Temp/CommandPipe\"");
+
+$donepipeKill = `fopen "/Users/tiffanylee/Desktop/School/TNS_2013-2017/2016f-2017s/Unity17/labor/New Unity Project/Temp/SyncPipeKill" "w"`;
+fwrite $donepipeKill "Done";
+fclose $donepipeKill;
